@@ -108,7 +108,7 @@ engineSelector({
     selectedNameSelector: ".name-character-monster",
     buttonSelector: ".btn-selecionar",
     buttonSrc: "./assets/botão-selecionar.png",
-    buttonSelectedSrc: "./assets/botão-selecionar.png",
+    buttonSelectedSrc: "./assets/botão-selecionado.png",
     ignoreLinks: true
 });
 
