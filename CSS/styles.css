@@ -1,0 +1,1947 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=IM+Fell+English+SC&family=Uncial+Antiqua&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* Tela de Seleção de Classe e Monstro */
+
+#body-class {
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+#body-class::before {
+    position: fixed;
+    content: "";
+    inset: 0;
+
+    background-image: url(/assets/tela-seleção-personagem.png);
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(1px);
+    transform: scale(1.1);
+
+    z-index: -1;
+}
+
+#body-monster {
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+#body-monster::before {
+    position: fixed;
+    content: "";
+    inset: 0;
+
+    background-image: url(/assets/Tela-seleção-monstro.png);
+    background-size: cover;
+    background-position: center;
+
+    filter: blur(3px);
+    transform: scale(1.1);
+
+    z-index: -1;
+}
+
+#body-combat {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+#body-combat::before {
+    position: fixed;
+    content: "";
+    inset: 0;
+
+    background-image: url(/assets/tela-combate.png);
+    background-size: cover;
+    background-position: center;
+
+    transform: scale(1.1);
+
+    z-index: -1;
+}
+
+
+#toast-response-class {
+    background-image: url(/assets/resposta-classe-monstro.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    aspect-ratio: 16 / 6;
+
+    width: 160px;
+    height: auto;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 430px;
+    left: -40px;
+}
+
+.response-class {
+    width: 95%;
+
+    font-family: "Im Fell English SC", serif;
+    font-weight: 400;
+    color: #FFFFFF;
+    font-size: clamp(10px, 1.4vw, 20px);
+    text-align: start;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-left: 42px;
+}
+
+#toast-response-monster {
+    background-image: url(/assets/resposta-classe-monstro.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    aspect-ratio: 16 / 6;
+
+    width: 160px;
+    height: auto;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 430px;
+    right: -40px;
+}
+
+.response-monster {
+    width: 80%;
+
+    font-family: "Im Fell English SC", serif;
+    font-weight: 400;
+    color: #FFFFFF;
+    font-size: clamp(10px, 1.4vw, 20px);
+    text-align: start;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-right: 30px;
+}
+
+/* Banner de Vitória */
+
+#section-victory {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#banner-victory {
+    background-image: url(/assets/banner-vitória.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 289px;
+    height: 184px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: clamp(6px, 1.5vw, 32px);
+
+    padding-top: 18px;
+
+    position: relative;
+}
+
+#title-victory {
+    font-family: "Uncial Antiqua", cursive;
+    font-weight: 400;
+    font-size: clamp(20px, 3.33vw, 48px);
+    color: #FFBC11;
+    text-shadow: 0px 0px 2px #000000;
+}
+
+#text-banner-victory {
+    width: 50%;
+    font-family: "IM FELL English SC", serif;
+    font-weight: 400;
+    font-size: clamp(12px, 2.34vw, 24px);
+    color: #FFFFFF;
+    text-align: center;
+    text-shadow: 0px 0px 2px #000000;
+}
+
+.btn-action-banner {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+}
+
+.btn-action-banner:nth-child(1) {
+    position: absolute;
+    top: 70%;
+    right: 0;
+    bottom: 0;
+    left: 15%;
+}
+
+.btn-action-banner:nth-child(3) {
+    position: absolute;
+    top: 70%;
+    right: 0;
+    bottom: 0;
+    right: 15%;
+}
+
+#toast-stock-victory {
+    display: none;
+}
+
+/* banner de Derrota */
+
+#section-derrota {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#banner-derrota {
+    background-image: url(/assets/banner-derrota.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 289px;
+    height: 184px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: clamp(6px, 1.5vw, 32px);
+
+    padding-top: 20px;
+
+    position: relative;
+}
+
+#title-derrota {
+    font-family: "IM FELL English SC", serif;
+    font-weight: 400;
+    font-size: clamp(24px, 3.33vw, 48px);
+    color: #CD0303;
+    text-shadow: 0px 0px 2px #000000;
+}
+
+#text-banner-derrota {
+    width: 50%;
+    font-family: "IM FELL English SC", serif;
+    font-weight: 400;
+    font-size: clamp(12px, 2.34vw, 24px);
+    color: #FFFFFF;
+    text-align: center;
+    text-shadow: 0px 0px 2px #000000;
+}
+
+.btn-action-banner {
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+}
+
+.btn-action-banner:nth-child(1) {
+    position: absolute;
+    top: 70%;
+    right: 0;
+    bottom: 0;
+    left: 18%;
+}
+
+.btn-action-banner:nth-child(3) {
+    position: absolute;
+    top: 70%;
+    right: 0;
+    bottom: 0;
+    right: 18%;
+}
+
+/* Header */
+
+#header-select-class {
+    background-image: url(/assets/background-seleção-classe-monstro.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center -20px;
+    height: 215px;
+}
+
+@media(min-width: 1024px) {
+    #header-select-class {
+        background-image: url(/assets/background-seleção-classe-monstro.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center 100%;
+        max-height: 372px;
+        height: 50vh;
+    }
+}
+
+#container-name-class {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.img-background-name-class {
+    max-width: 216px;
+    width: 216px;
+    height: 65px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-background-name-class {
+        max-width: 400px;
+        width: 20.83vw;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+.img-background-name-monster {
+    max-width: 266px;
+    width: 266px;
+    height: 80px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-background-name-monster {
+        max-width: 400px;
+        width: 23vw;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+.name-character-class {
+    font-family: "Uncial Antiqua", cursive;
+    font-weight: 400;
+    font-size: clamp(12px, 1.94vw, 20px);
+    position: absolute;
+    top: 45%;
+    color: #E3BB38;
+    text-shadow: 0px 0px 1px #000000;
+    transform: opacity 200ms ease, transform 200ms ease;
+}
+
+.name-charater-class.fade-out {
+    opacity: 0;
+    transform: translateY(-4px);
+}
+
+.name-charater-class.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media(min-width: 768px) {
+    .name-character-class {
+        font-family: "Uncial Antiqua", cursive;
+        font-weight: 400;
+        font-size: clamp(12px, 1.38vw, 20px);
+        position: absolute;
+        top: 41%;
+        color: #E3BB38;
+        text-shadow: 0px 0px 1px #000000;
+    }
+}
+
+@media(min-width: 1024px) {
+    .name-character-class {
+        font-family: "Uncial Antiqua", cursive;
+        font-weight: 400;
+        font-size: clamp(12px, 1.38vw, 20px);
+        position: absolute;
+        top: 41%;
+        color: #E3BB38;
+        text-shadow: 0px 0px 1px #000000;
+    }
+}
+
+.name-character-monster {
+    font-family: "Uncial Antiqua", cursive;
+    font-weight: 400;
+    font-size: 12px;
+    position: absolute;
+    padding-left: 5px;
+    top: 36%;
+    color: #CD0303;
+    text-shadow: 0px 0px 1px #000000;
+    transform: opacity 200ms ease, transform 200ms ease;
+}
+
+@media(min-width: 1024px) {
+    .name-character-monster {
+        font-family: "Uncial Antiqua", cursive;
+        font-weight: 400;
+        font-size: clamp(12px, 1vw, 16px);
+        position: absolute;
+        padding-left: 5px;
+        top: 36%;
+        color: #CD0303;
+        text-shadow: 0px 0px 1px #000000;
+    }
+}
+
+#container-class-vs-monster {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding-top: 10px;
+}
+
+@media(min-width: 1024px) {
+    #container-class-vs-monster {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 0;
+        padding-top: 0;
+    }
+}
+
+.img-selected-class {
+    max-width: 370px;
+    width: 115px;
+    max-height: 80px;
+    height: 80px;
+    object-fit: contain;
+    transition: opacity 200ms ease;
+}
+
+@media(min-width: 1024px) {
+    .img-selected-class {
+        max-width: 370px;
+        width: 25.69vw;
+        max-height: 225px;
+        height: 21.97vh;
+        object-fit: contain;
+    }
+}
+
+.img-selected-monster {
+    max-width: 370px;
+    width: 115px;
+    max-height: 80px;
+    height: 80px;
+    object-fit: contain;
+    transition: opacity 200ms ease;
+}
+
+@media(min-width: 1024px) {
+    .img-selected-monster {
+        max-width: 370px;
+        width: 25.69vw;
+        max-height: 225px;
+        height: 21.97vh;
+        object-fit: contain;
+    }
+}
+
+.img-vs {
+    max-width: 60px;
+    width: 60px;
+    max-height: 40px;
+    height: auto;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-vs {
+        max-width: 135px;
+        width: 9.375vw;
+        max-height: 90px;
+        height: 8.78vh;
+        object-fit: contain;
+    }
+}
+
+#section-card-character {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 0;
+
+    max-width: 420px;
+    margin: 0 auto;
+
+    margin-top: -10px;
+    padding-bottom: 120px;
+}
+
+@media(min-width: 640px) {
+    #section-card-character {
+        display: grid;
+        grid-template-columns: repeat(2, 260px);
+        place-items: center;
+        align-items: stretch;
+        gap: 0;
+
+        max-width: 1200px;
+        margin: 0 auto;
+
+        padding-top: clamp(3px, 1vw, 5px);
+        padding-bottom: 120px;
+    }
+}
+
+@media(min-width: 1024px) {
+    #section-card-character {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(260px, 1fr));
+        place-items: center;
+        gap: 0;
+
+        max-width: 1200px;
+        margin: 0 auto;
+
+        padding-top: clamp(3px, 1vw, 5px);
+        padding-bottom: clamp(100px, 14vw, 130px);
+    }
+}
+
+.card-character {
+    background-image: url(/assets/background-container-classe-monstro.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    max-width: 250px;
+    width: min(250px, 100%);
+    height: 163px;
+
+    aspect-ratio: 583 / 386;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+@media(min-width: 1024px) {
+    .card-character {
+        background-image: url(/assets/background-container-classe-monstro.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        max-width: 399px;
+        width: 100%;
+
+        height: 250px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+}
+
+.container-name-img {
+    width: 90%;
+    position: absolute;
+    left: 20px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name-class-card {
+    position: absolute;
+    bottom: 100%;
+    left: 15%;
+    font-family: "Uncial Antiqua", cursive;
+    font-weight: 500;
+    font-size: clamp(12px, 1.94vw, 20px);
+    color: #E3BB38;
+    text-shadow: 0px 0px 2px #000000;
+    z-index: 2;
+}
+
+.name-monster-card {
+    width: 130px;
+    position: absolute;
+    bottom: 100%;
+    left: -3%;
+    font-family: "Uncial Antiqua", cursive;
+    font-weight: 500;
+    font-size: clamp(12px, 1.45vw, 20px);
+    color: #CD0303;
+    text-shadow: 0px 0px 1px #000000;
+    text-align: center;
+    z-index: 2;
+}
+
+@media(min-width: 768px) {
+    .name-monster-card {
+        width: 130px;
+        position: absolute;
+        bottom: 100%;
+        left: -3%;
+        font-family: "Uncial Antiqua", cursive;
+        font-weight: 600;
+        font-size: clamp(12px, 1.45vw, 20px);
+        color: #CD0303;
+        text-shadow: 0px 0px 1px #000000;
+        text-align: center;
+        z-index: 2;
+    }
+}
+
+@media(min-width: 1024px) {
+    .name-monster-card {
+        width: 140px;
+        position: absolute;
+        bottom: 100%;
+        left: 10%;
+        font-family: "Uncial Antiqua", cursive;
+        font-weight: 600;
+        font-size: clamp(12px, 1.45vw, 20px);
+        color: #CD0303;
+        text-shadow: 0px 0px 1px #000000;
+        text-align: center;
+        z-index: 2;
+    }
+}
+
+.img-class-card-cleric {
+    position: absolute;
+    bottom: -25px;
+    right: 20px;
+
+    width: 150px;
+    height: 90px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-class-card-cleric {
+        position: absolute;
+        bottom: -77px;
+        right: 25px;
+
+        max-width: 296px;
+        width: 20.55vw;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-class-card-paladin {
+    position: absolute;
+    bottom: -25px;
+    right: 20px;
+
+    width: 150px;
+    height: 90px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-class-card-paladin {
+        position: absolute;
+        bottom: -77px;
+        right: 8px;
+
+        max-width: 296px;
+        width: 20.55vw;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-class-card-barbarian {
+    position: absolute;
+    bottom: -38px;
+    right: 0;
+
+    width: 150px;
+    height: 90px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-class-card-barbarian {
+        position: absolute;
+        bottom: -78px;
+        right: 10px;
+
+        max-width: 296px;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-class-card-sorcerer {
+    position: absolute;
+    bottom: -38px;
+    right: 0;
+
+    width: 150px;
+    height: 90px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-class-card-sorcerer {
+        position: absolute;
+        bottom: -78px;
+        right: -40px;
+
+        max-width: 296px;
+        width: 20.55vw;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-class-card-wizard {
+    position: absolute;
+    bottom: -38px;
+    right: 0;
+
+    width: 150px;
+    height: 90px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-class-card-wizard {
+        position: absolute;
+        bottom: -78px;
+        right: -50px;
+
+        max-width: 296px;
+        width: 20.55vw;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-class-card-rogue {
+    position: absolute;
+    bottom: -38px;
+    right: 0;
+
+    width: 150px;
+    height: 90px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-class-card-rogue {
+        position: absolute;
+        bottom: -78px;
+        right: 15px;
+
+        max-width: 296px;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-monster-card-ancient-red-dragon {
+    position: absolute;
+    bottom: -40px;
+    right: -10px;
+
+    width: 150px;
+    height: 110px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-monster-card-ancient-red-dragon {
+        position: absolute;
+        bottom: -75px;
+        right: 10px;
+
+        max-width: 296px;
+        width: 183px;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-monster-card-balor {
+    position: absolute;
+    bottom: -38px;
+    right: 8px;
+
+    width: 150px;
+    height: 110px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-monster-card-balor {
+        position: absolute;
+        bottom: -75px;
+        right: 5px;
+
+        max-width: 296px;
+        width: 283px;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-monster-card-archmage {
+    position: absolute;
+    bottom: -42px;
+    right: 0px;
+
+    width: 150px;
+    height: 110px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-monster-card-archmage {
+        position: absolute;
+        bottom: -73px;
+        right: 0px;
+
+        max-width: 296px;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-monster-card-oni {
+    position: absolute;
+    bottom: -38px;
+    right: 20px;
+
+    width: 150px;
+    height: 110px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-monster-card-oni {
+        position: absolute;
+        bottom: -70px;
+        right: 40px;
+
+        max-width: 296px;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-monster-card-chimera {
+    position: absolute;
+    bottom: -32px;
+    right: 20px;
+
+    width: 115px;
+    height: 110px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-monster-card-chimera {
+        position: absolute;
+        bottom: -50px;
+        right: 35px;
+
+        max-width: 296px;
+        width: 173px;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.img-monster-card-aboleth {
+    position: absolute;
+    bottom: -37px;
+    right: 5px;
+
+    width: 150px;
+    height: 110px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-monster-card-aboleth {
+        position: absolute;
+        bottom: -60px;
+        right: 20px;
+
+        max-width: 296px;
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+    }
+}
+
+.contain-btn-view-equip {
+    display: flex;
+    padding-top: 90px;
+    z-index: 2;
+}
+
+@media(min-width: 1024px) {
+    .contain-btn-view-equip {
+        display: flex;
+        padding-top: 120px;
+        z-index: 2;
+    }
+}
+
+.contain-btn-view-equip a {
+    margin-right: -10px;
+}
+
+@media(min-width: 1024px) {
+    .contain-btn-view-equip a {
+        margin-right: -15px;
+    }
+}
+
+#footer-class-fantasy {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+
+    max-height: 120px;
+    height: 120px;
+
+    background-image: url(/assets/footer.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 24px;
+
+    padding-top: 40px;
+
+    z-index: 9999;
+}
+
+@media(min-width: 640px) {
+    #footer-class-fantasy {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+
+        max-height: 120px;
+        height: 120px;
+
+        background-image: url(/assets/footer-desktop.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        padding-top: 16px;
+
+        z-index: 9999;
+    }
+}
+
+@media(min-width: 1024px) {
+    #footer-class-fantasy {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+
+        max-height: 120px;
+        height: 120px;
+
+        background-image: url(/assets/footer-desktop.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        padding-top: 16px;
+
+        z-index: 9999;
+    }
+}
+
+.btn-cards,
+.btn-selecionar,
+.btn-equipar,
+.btn-back,
+.btn-next,
+.btn-play {
+    max-width: 90px;
+    width: 90px;
+    max-height: 90px;
+    height: 60px;
+    object-fit: contain;
+    transition: transform 200ms ease, filter 200ms ease, opacity 200ms ease;
+    cursor: pointer;
+}
+
+@media(min-width: 1024px) {
+
+    .btn-cards,
+    .btn-selecionar,
+    .btn-equipar,
+    .btn-back,
+    .btn-next,
+    .btn-play {
+        max-width: 180px;
+        width: 12.5vw;
+        max-height: 120px;
+        height: 120px;
+        object-fit: contain;
+        cursor: pointer;
+    }
+}
+
+.btn-cards {
+    transition: transform 200ms ease, filter 200ms ease, opacity 200ms ease;
+}
+
+.btn-cards:hover,
+.btn-selecionar:hover,
+.btn-equipar:hover,
+.btn-back:hover,
+.btn-next:hover,
+.btn-play:hover {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+}
+
+.btn-equipar {
+    cursor: pointer;
+    transition: transform 200ms ease, filter 200ms ease, opacity 200ms ease;
+}
+
+.btn-equipar.equipped {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+}
+
+/* Tela de Combate por turno */
+
+#header-bar-life {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 2%;
+}
+
+#container-bar-life {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+#container-bar-life-left {
+    position: relative;
+}
+
+.indicator-bar-life-class {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 30%;
+    left: 24%;
+}
+
+@media(min-width: 768px) {
+    .indicator-bar-life-class {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 32%;
+        left: 24%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .indicator-bar-life-class {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 32%;
+        left: 25%;
+    }
+}
+
+.number-hp-class {
+    font-family: "Uncial Antiqua", cursive;
+    color: #FFFFFF;
+    -webkit-text-stroke-width: .25px;
+    -webkit-text-stroke-color: #D2B34F;
+    font-size: clamp(12px, 1.5vw, 22px);
+    padding-bottom: 3px;
+}
+
+@media (min-width: 768px) {
+    .number-hp-class {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        -webkit-text-stroke-width: .25px;
+        -webkit-text-stroke-color: #D2B34F;
+        font-size: 18px;
+        padding-bottom: 3px;
+    }
+}
+
+.barra-class {
+    font-family: "Uncial Antiqua", cursive;
+    color: #D2B34F;
+    font-size: clamp(8px, 1vw, 12px);
+    padding-top: 2px;
+}
+
+@media (min-width: 768px) {
+    .barra-class {
+        font-family: "Uncial Antiqua", cursive;
+        color: #D2B34F;
+        font-size: 14px;
+        padding-top: 2px;
+    }
+}
+
+.number-hpMax-class {
+    font-family: "Uncial Antiqua", cursive;
+    color: #FFFFFF;
+    font-size: clamp(8px, 1vw, 12px);
+}
+
+@media (min-width: 768px) {
+    .number-hpMax-class {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        font-size: 14px;
+    }
+}
+
+.name-class-bar-life {
+    font-family: "Uncial Antiqua", cursive;
+    color: #FFFFFF;
+    font-size: clamp(4px, 1.5vw, 12px);
+    -webkit-text-stroke-width: .25px;
+    -webkit-text-stroke-color: #D2B34F;
+    position: absolute;
+    top: 17%;
+    left: 45%;
+}
+
+@media(min-width: 768px) {
+    .name-class-bar-life {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        font-size: clamp(6px, 1.5vw, 14px);
+        -webkit-text-stroke-width: .25px;
+        -webkit-text-stroke-color: #D2B34F;
+        position: absolute;
+        top: 25%;
+        left: 45%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .name-class-bar-life {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        font-size: clamp(6px, 1.5vw, 14px);
+        -webkit-text-stroke-width: .25px;
+        -webkit-text-stroke-color: #D2B34F;
+        position: absolute;
+        top: 25%;
+        left: 45%;
+    }
+}
+
+.bar-life-animated-left {
+    position: absolute;
+    background: linear-gradient(90deg, rgba(205, 3, 3, 1) 0%, rgba(104, 25, 25, 1) 64%);
+    width: 98px;
+    height: 9px;
+    top: 30px;
+    left: 67px;
+    border-top-left-radius: 5px;
+}
+
+@media(min-width: 768px) {
+    .bar-life-animated-left {
+        width: 185px;
+        height: 19px;
+        top: 41.5%;
+        left: 40%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .bar-life-animated-left {
+        width: 202px;
+        height: 20px;
+        top: 41.5%;
+        left: 40%;
+    }
+}
+
+.structure-bar-life-animated-left {
+    width: 170px;
+    height: auto;
+    object-fit: contain;
+}
+
+@media(min-width: 768px) {
+    .structure-bar-life-animated-left {
+        width: 320px;
+        object-fit: contain;
+    }
+}
+
+@media(min-width: 1024px) {
+    .structure-bar-life-animated-left {
+        width: 350px;
+        object-fit: contain;
+    }
+}
+
+.structure-bar-life-animated-right {
+    width: 170px;
+    height: auto;
+    transform: scaleX(-1);
+}
+
+@media(min-width: 768px) {
+    .structure-bar-life-animated-right {
+        width: 320px;
+        object-fit: contain;
+    }
+}
+
+@media(min-width: 1024px) {
+    .structure-bar-life-animated-right {
+        width: 350px;
+        height: auto;
+        transform: scaleX(-1);
+    }
+}
+
+#container-bar-life-right {
+    position: relative;
+}
+
+.indicator-bar-life-monster {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 30%;
+    right: 24%;
+    z-index: 2;
+}
+
+@media(min-width: 768px) {
+    .indicator-bar-life-monster {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 32%;
+        right: 24%;
+        z-index: 2;
+    }
+}
+
+@media(min-width: 1024px) {
+    .indicator-bar-life-monster {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 32%;
+        right: 25%;
+        z-index: 2;
+    }
+}
+
+.number-hp-monster {
+    font-family: "Uncial Antiqua", cursive;
+    color: #FFFFFF;
+    -webkit-text-stroke-width: .25px;
+    -webkit-text-stroke-color: #CD0303;
+    font-size: clamp(12px, 1.5vw, 22px);
+    padding-bottom: 3px;
+}
+
+@media (min-width: 768px) {
+    .number-hp-monster {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        -webkit-text-stroke-width: .25px;
+        -webkit-text-stroke-color: #CD0303;
+        font-size: 18px;
+        padding-bottom: 3px;
+    }
+}
+
+.barra-monster {
+    font-family: "Uncial Antiqua", cursive;
+    color: #CD0303;
+    font-size: clamp(8px, 1vw, 12px);
+    padding-top: 2px;
+}
+
+@media (min-width: 768px) {
+    .barra-monster {
+        font-family: "Uncial Antiqua", cursive;
+        color: #CD0303;
+        font-size: 14px;
+        padding-top: 2px;
+    }
+}
+
+.number-hpMax-monster {
+    font-family: "Uncial Antiqua", cursive;
+    color: #FFFFFF;
+    font-size: clamp(8px, 1vw, 12px);
+}
+
+@media (min-width: 768px) {
+    .number-hpMax-monster {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        font-size: 14px;
+    }
+}
+
+.name-monster-bar-life {
+    font-family: "Uncial Antiqua", cursive;
+    color: #FFFFFF;
+    font-size: clamp(4px, 1.5vw, 12px);
+    -webkit-text-stroke-width: .25px;
+    -webkit-text-stroke-color: #CD0303;
+    position: absolute;
+    top: 17%;
+    right: 45%;
+}
+
+@media(min-width: 768px) {
+    .name-monster-bar-life {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        font-size: clamp(6px, 1.5vw, 14px);
+        -webkit-text-stroke-width: .25px;
+        -webkit-text-stroke-color: #D2B34F;
+        position: absolute;
+        top: 25%;
+        right: 45%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .name-monster-bar-life {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        font-size: clamp(4px, 1.5vw, 14px);
+        -webkit-text-stroke-width: .25px;
+        -webkit-text-stroke-color: #CD0303;
+        position: absolute;
+        top: 25%;
+        right: 45%;
+    }
+}
+
+.bar-life-animated-right {
+    position: absolute;
+    background: linear-gradient(90deg, rgba(205, 3, 3, 1) 0%, rgba(104, 25, 25, 1) 64%);
+    width: 98px;
+    height: 9px;
+    top: 30px;
+    right: 67px;
+    border-top-right-radius: 5px;
+}
+
+@media(min-width: 768px) {
+    .bar-life-animated-right {
+        width: 185px;
+        height: 19px;
+        top: 41.5%;
+        right: 40%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .bar-life-animated-right {
+        width: 202px;
+        height: 20px;
+        top: 41.5%;
+        right: 40%;
+    }
+}
+
+#main-combat {
+    width: 100%;
+    height: 100%;
+    padding: 4px 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#section-combat {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: clamp(50px, 13.88vw, 200px);
+    height: 96vh;
+    position: relative;
+}
+
+@media(min-width: 768px) {
+    #section-combat {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(150px, 13.88vw, 200px);
+        height: 75vh;
+        position: relative;
+    }
+}
+
+@media(min-width: 1024px) {
+    #section-combat {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: clamp(150px, 13.88vw, 200px);
+        height: 70vh;
+        position: relative;
+    }
+}
+
+.img-class-combat {
+    width: 150px;
+    height: 110px;
+    object-fit: contain;
+}
+
+@media(min-width: 768px) {
+    .img-class-combat {
+        width: 200px;
+        height: 170px;
+        object-fit: contain;
+        transform: translate(0%, -10%);
+    }
+}
+
+@media(min-width: 1024px) {
+    .img-class-combat {
+        width: 400px;
+        height: 200px;
+        object-fit: contain;
+        transform: translate(-10%, -5%);
+    }
+}
+
+@media(min-height: 1024px) {
+    .img-class-combat {
+        width: 400px;
+        object-fit: contain;
+        transform: translate(10%, 30%);
+    }
+}
+
+.img-vs-combat {
+    display: none;
+}
+
+@media(min-width: 1024px) {
+    .img-vs-combat {
+        display: flex;
+        width: 90px;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+.img-monster-combat {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+
+@media(min-width: 768px) {
+    .img-monster-combat {
+        width: 200px;
+        height: 300px;
+        object-fit: contain;
+        transform: translate(0%, -10%);
+    }
+}
+
+@media(min-width: 1024px) {
+    .img-monster-combat {
+        width: 400px;
+        height: 300px;
+        object-fit: contain;
+        transform: translate(10%, -5%);
+    }
+}
+
+@media(min-height: 1024px) {
+    .img-monster-combat {
+        width: 400px;
+        object-fit: contain;
+        transform: translate(10%, 20%);
+    }
+}
+
+#container-dice {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media(min-width: 1024px) {
+    #container-dice {
+        position: absolute;
+        top: -5%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.img-dice {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+}
+
+#number-dice {
+    position: absolute;
+    left: 43.4%;
+    top: 26%;
+    font-family: "Cinzel", serif;
+    font-weight: bold;
+    font-size: clamp(22px, 2.22vw, 20px);
+    color: #dad5b4;
+}
+
+.btn-roll-dice {
+    width: 90px;
+    height: auto;
+}
+
+#container-actions {
+    position: absolute;
+    bottom: 14%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+@media(min-width: 1024px) {
+    #container-actions {
+        position: absolute;
+        bottom: 3%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+.btn-attack,
+.btn-heal,
+.btn-spell {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+
+    .btn-attack,
+    .btn-heal,
+    .btn-spell {
+        width: 130px;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+@media(min-height: 1300px) {
+
+    .btn-attack,
+    .btn-heal,
+    .btn-spell {
+        width: 250px;
+        height: auto;
+        object-fit: contain;
+    }
+}
+
+#container-action-heal-spell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Tela Inspecione Class */
+
+#header-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.img-logo-CFR {
+    display: none;
+}
+
+#container-background-data-class {
+    background-image: url(/assets/background-nome-classe.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 216px;
+    height: 65px;
+}
+
+@media(min-width: 1024px) {
+    #container-background-data-class {
+        background-image: url(/assets/background-nome-classe.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        width: 380px;
+        height: 100px;
+    }
+}
+
+#container-background-data-monster {
+    background-image: url(/assets/background-nome-monstro.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 270px;
+    height: 65px;
+}
+
+@media(min-width: 1024px) {
+    #container-background-data-monster {
+        background-image: url(/assets/background-nome-monstro.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        width: 380px;
+        height: 100px;
+    }
+}
+
+#title-data-class {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-family: "Uncial Antiqua", cursive;
+    font-weight: 500;
+    font-size: clamp(12px, 1.8vw, 24px);
+    color: #E3BB38;
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.6);
+}
+
+#title-data-monster {
+    position: absolute;
+    top: 31%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-family: "Uncial Antiqua", cursive;
+    font-weight: 500;
+    font-size: clamp(12px, 1.66vw, 24px);
+    color: #CD0303;
+    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.6);
+}
+
+.main-data {
+    padding-bottom: clamp(100px, 16vw, 140px);
+    overflow-x: hidden;
+}
+
+.section-background-data {
+    background-image: url(/assets/background-informação-personagem-monstro.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    max-height: 570px;
+    height: 570px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 60px;
+
+    margin: 0 auto;
+}
+
+@media(min-width: 1024px) {
+    .section-background-data {
+        background-image: url(/assets/background-informação-personagem-monstro.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        width: 50%;
+        max-height: 760px;
+        height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        padding-top: 0;
+
+        margin: 1rem;
+    }
+}
+
+.img-class-data {
+    width: 115px;
+    height: 70px;
+    object-fit: contain;
+}
+
+@media(min-width: 1024px) {
+    .img-class-data {
+        position: absolute;
+        top: 30%;
+        right: 3%;
+
+        max-width: 781px;
+        width: 45vw;
+        max-height: 350px;
+        height: 40vh;
+        object-fit: contain;
+    }
+}
+
+.contain-all-data {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+}
+
+@media(min-width: 1024px) {
+    .contain-all-data {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        gap: 20px;
+    }
+}
+
+.contain-status {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+}
+
+.title-data {
+    font-family: "Uncial Antiqua", cursive;
+    font-weight: 500;
+    font-size: clamp(14px, 1.66vw, 24px);
+    color: #36231D;
+    text-shadow: 0px 0px 3px #000000;
+    padding: 12px;
+}
+
+.life,
+.defense,
+.attack,
+.damage {
+    width: 100%;
+    height: 21px;
+    background-color: #36231D;
+    border-radius: 5px;
+    padding: 12px 6px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: "IM FELL English SC", serif;
+    font-weight: 400;
+    font-size: clamp(12px, 1.5vw, 24px);
+    color: #FFFFFF;
+}
+
+.contain-def-attack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 6px;
+}
+
+.contain-index-victory-defeat {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 19px;
+}
+
+.index-victory,
+.index-defeat {
+    font-family: "IM FELL English SC", serif;
+    font-weight: 500;
+    font-size: clamp(16px, 1.38vw, 20px);
+    color: #FFFFFF;
+}
+
+.subtitle-spell-class,
+.subtitle-equipment-class {
+    font-family: "Uncial Antiqua", cursive;
+    font-weight: 500;
+    font-size: clamp(12px, 1.4vw, 20px);
+    color: #FFFFFF;
+    text-shadow: 0px 0px 2px #000000;
+    padding-left: 20px;
+}
+
+.type-damage,
+.txt-damage-dice,
+.weapon-category,
+.armor-class,
+.armor-category {
+    font-family: "IM FELL English SC", serif;
+    font-weight: 300;
+    font-size: clamp(12px, 1.32vw, 20px);
+    color: #FFFFFF;
+    padding-left: 40px;
+}
+
+.equipment-class {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+
+.spell-class {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+.fade-in {
+    opacity: 1;
+}

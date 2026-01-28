@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/styles.css">
+    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <title>Combate | Class Fantasy</title>
+</head>
+
+<body id="body-combat">
+    <header id="header-bar-life">
+        <div id="container-bar-life">
+            <div id="container-bar-life-left">
+                <div class="indicator-bar-life-class">
+                    <span class="number-hp-class">0</span>
+                    <span class="barra-class">/</span>
+                    <span class="number-hpMax-class">0</span>
+                </div>
+                <p class="name-class-bar-life">CLASS</p>
+                <img src="./assets/barra-vida-animada.png" alt="barra-vida-animada"
+                    class="structure-bar-life-animated-left">
+                <div class="bar-life-animated-left"></div>
+            </div>
+
+            <img src="./assets/VS.png" alt="imagem-VS" class="img-vs-combat">
+
+            <div id="container-bar-life-right">
+                <div class="indicator-bar-life-monster">
+                    <span class="number-hp-monster">0</span>
+                    <span class="barra-monster">/</span>
+                    <span class="number-hpMax-monster">0</span>
+                </div>
+                <p class="name-monster-bar-life">MONSTER</p>
+                <img src="./assets/barra-vida-animada.png" alt="barra-vida-animada"
+                    class="structure-bar-life-animated-right">
+                <div class="bar-life-animated-right"></div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-combat">
+        <section id="section-combat">
+            <img src="./assets/cleric-class.png" alt="class-combate" class="img-class-combat">
+
+            <div id="container-dice">
+                <img src="./assets/dado-D20.png" alt="dado-D20" class="img-dice">
+                <p id="number-dice">0</p>
+                <img src="./assets/botão-rolar-dado.png" alt="botção-rolar-dado" class="btn-roll-dice">
+            </div>
+
+            <img src="./assets/ancient-red-dragon-monster.png" alt="monster-combat" class="img-monster-combat">
+        </section>
+
+        <div id="container-actions">
+            <img src="./assets/botão-atacar.png" alt="botão-atacar" class="btn-attack">
+
+            <div id="container-action-heal-spell">
+                <img src="./assets/botão-cura.png" alt="botão-cura" class="btn-heal">
+                <img src="./assets/botão-magia.png" alt="botão-magia" class="btn-spell">
+            </div>
+        </div>
+    </main>
+
+    <div id="toast-response-class">
+        <p class="response-class">Cleric usou a magia GUIDING BOLT</p>
+    </div>
+
+    <div id="toast-response-monster">
+        <p class="response-monster">Ancient Red Dragon usou a habilidade especial FIRE BREATH</p>
+    </div>
+
+    <section id="section-victory">
+        <div id="banner-victory">
+            <h2 id="title-victory">VITÓRIA</h2>
+            <p id="text-banner-victory">
+                Você derrotou o ${monster} com sucesso!
+            </p>
+
+            <div id="container-btns-action">
+                <img src="./assets/botão-sua-jornada.png" alt="botão-sua-jornada" class="btn-action-banner">
+                <img src="./assets/botão-jogar-novamente.png" alt="jogar-novamente" class="btn-action-banner">
+                <img src="./assets/botão-sair.png" alt="sair" class="btn-action-banner">
+            </div>
+        </div>
+    </section>
+
+    <div id="toast-stock-victory">
+        <p id="txt-toast-stock-victory">${monster} foi adicionado ao índice de vitória.</p>
+    </div>
+
+    <section id="section-derrota">
+        <div id="banner-derrota">
+            <h2 id="title-derrota">Derrota</h2>
+            <p id="text-banner-derrota">
+                Fracassou com sua dignidade de vitória...
+            </p>
+
+            <div id="container-btns-action">
+                <img src="./assets/botão-sua-jornada.png" alt="botão-sua-jornada" class="btn-action-banner">
+                <img src="./assets/botão-jogar-novamente.png" alt="jogar-novamente" class="btn-action-banner">
+                <img src="./assets/botão-sair.png" alt="sair" class="btn-action-banner">
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
