@@ -25,8 +25,6 @@
     background-position: center;
 
     filter: blur(1px);
-    transform: scale(1.1);
-
     z-index: -1;
 }
 
@@ -46,8 +44,6 @@
     background-position: center;
 
     filter: blur(3px);
-    transform: scale(1.1);
-
     z-index: -1;
 }
 
@@ -62,11 +58,10 @@
     content: "";
     inset: 0;
 
+    overflow-x: hidden;
     background-image: url(/assets/tela-combate.png);
     background-size: cover;
     background-position: center;
-
-    transform: scale(1.1);
 
     z-index: -1;
 }
@@ -82,17 +77,38 @@
     width: 160px;
     height: auto;
 
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
 
     position: absolute;
-    top: 430px;
+    top: 65%;
     left: -40px;
 }
 
+@media (min-width: 1024px) {
+    #toast-response-class {
+        background-image: url(/assets/resposta-classe-monstro.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        aspect-ratio: 16 / 6;
+
+        max-width: 400px;
+        width: 27vw;
+        height: auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        top: 70%;
+    }
+}
+
 .response-class {
-    width: 95%;
+    width: 90%;
 
     font-family: "Im Fell English SC", serif;
     font-weight: 400;
@@ -104,7 +120,13 @@
     justify-content: center;
     align-items: center;
 
-    padding-left: 42px;
+    padding-left: 35px;
+}
+
+@media(min-width: 1024px) {
+    .response-class {
+        padding-left: 10px;
+    }
 }
 
 #toast-response-monster {
@@ -117,17 +139,38 @@
     width: 160px;
     height: auto;
 
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
 
-    position: absolute;
-    top: 430px;
+    position: fixed;
+    top: 72.5%;
     right: -40px;
 }
 
+@media (min-width: 1024px) {
+    #toast-response-monster {
+        background-image: url(/assets/resposta-classe-monstro.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        aspect-ratio: 16 / 6;
+
+        max-width: 400px;
+        width: 27vw;
+        height: auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        top: 70%;
+    }
+}
+
 .response-monster {
-    width: 80%;
+    width: 90%;
 
     font-family: "Im Fell English SC", serif;
     font-weight: 400;
@@ -139,21 +182,40 @@
     justify-content: center;
     align-items: center;
 
-    padding-right: 30px;
+    padding-right: 35px;
+}
+
+@media(min-width: 1024px) {
+    .response-monster {
+        padding-right: 10px;
+    }
 }
 
 /* Banner de Vitória */
 
 #section-victory {
     position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    inset: 0;
     z-index: 999;
-    display: none;
+
+    display: flex;
     justify-content: center;
     align-items: center;
+
+    pointer-events: all;
+    margin: 0 auto;
+
+    opacity: 0;
+    transform: translateY(24px);
+    pointer-events: none;
+    transition: opacity 280ms ease, transform 280ms ease;
+}
+
+#section-victory::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 #banner-victory {
@@ -170,11 +232,41 @@
     justify-content: center;
     align-items: center;
 
-    gap: clamp(6px, 1.5vw, 32px);
+    gap: 6px;
 
     padding-top: 18px;
 
     position: relative;
+    z-index: 1;
+    transition: opacity .5s ease, transform .5s ease;
+}
+
+@media(min-width: 768px) {
+    #banner-victory {
+        width: 400px;
+        height: 250px;
+
+        gap: 0;
+
+        padding-top: 0px;
+
+        position: relative;
+        z-index: 1;
+    }
+}
+
+@media(min-width: 1024px) {
+    #banner-victory {
+        width: 681px;
+        height: 431px;
+
+        gap: 15px;
+
+        padding-top: 0px;
+
+        position: relative;
+        z-index: 1;
+    }
 }
 
 #title-victory {
@@ -186,53 +278,158 @@
 }
 
 #text-banner-victory {
-    width: 50%;
+    width: 70%;
     font-family: "IM FELL English SC", serif;
     font-weight: 400;
     font-size: clamp(12px, 2.34vw, 24px);
     color: #FFFFFF;
     text-align: center;
-    text-shadow: 0px 0px 2px #000000;
+    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
 }
 
-.btn-action-banner {
-    width: 60px;
-    height: auto;
-    object-fit: contain;
+.btn-journey-banner:hover,
+.btn-play-again-banner:hover,
+.btn-exit-banner:hover {
+    transform: translateY(5px);
 }
 
-.btn-action-banner:nth-child(1) {
+.btn-journey-banner {
     position: absolute;
     top: 70%;
-    right: 0;
-    bottom: 0;
     left: 15%;
+
+    width: 70px;
+    height: auto;
+    transition: .3s ease;
+    cursor: pointer;
 }
 
-.btn-action-banner:nth-child(3) {
+@media(min-width: 1024px) {
+    .btn-journey-banner {
+        width: 138px;
+        top: 70%;
+        left: 25%;
+    }
+}
+
+.btn-play-again-banner {
+    width: 70px;
+    height: auto;
+    transition: .3s ease;
+    cursor: pointer;
+}
+
+@media(min-width: 1024px) {
+    .btn-play-again-banner {
+        width: 138px;
+    }
+}
+
+.btn-exit-banner {
     position: absolute;
     top: 70%;
-    right: 0;
-    bottom: 0;
     right: 15%;
+    width: 70px;
+    height: auto;
+    transition: .3s ease;
+}
+
+
+@media(min-width: 1024px) {
+    .btn-exit-banner {
+        width: 138px;
+        top: 70%;
+        right: 25%;
+    }
 }
 
 #toast-stock-victory {
-    display: none;
+    background-image: url(/assets/toast-guardar-monstro-derrotado.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    aspect-ratio: 16 / 6;
+
+    width: 200px;
+    height: auto;
+
+    z-index: 9999;
+    position: fixed;
+    top: 65%;
+    right: -12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    transform: translateX(22px);
+    pointer-events: none;
+    transition: opacity 220ms ease, transform 220ms ease;
+    will-change: transform, opacity;
+}
+
+@media(min-width: 1024px) {
+    #toast-stock-victory {
+        background-image: url(/assets/toast-guardar-monstro-derrotado.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        width: 376px;
+
+        position: fixed;
+        top: 65%;
+        right: -6%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+#txt-toast-stock-victory {
+    width: 40%;
+    font-family: "IM Fell English SC", sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    text-align: center;
+}
+
+@media(min-width: 1024px) {
+    #txt-toast-stock-victory {
+        width: 40%;
+        font-family: "IM Fell English SC", sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        text-align: center;
+    }
 }
 
 /* banner de Derrota */
 
 #section-derrota {
     position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    inset: 0;
     z-index: 999;
-    display: none;
+
+    display: flex;
     justify-content: center;
     align-items: center;
+
+    pointer-events: all;
+    margin: 0 auto;
+
+    opacity: 0;
+    transform: translateY(24px);
+    pointer-events: none;
+    transition: opacity 280ms ease, transform 280ms ease;
+}
+
+#section-derrota::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 #banner-derrota {
@@ -254,6 +451,34 @@
     padding-top: 20px;
 
     position: relative;
+    z-index: 1;
+}
+
+@media(min-width: 768px) {
+    #banner-derrota {
+        width: 400px;
+        height: 250px;
+
+        gap: 0;
+
+        padding-top: 0px;
+
+        position: relative;
+        z-index: 1;
+    }
+}
+
+@media(min-width: 1024px) {
+    #banner-derrota {
+        width: 681px;
+        height: 431px;
+
+        gap: 0;
+
+        padding-top: 18px;
+
+        position: relative;
+    }
 }
 
 #title-derrota {
@@ -274,28 +499,6 @@
     text-shadow: 0px 0px 2px #000000;
 }
 
-.btn-action-banner {
-    width: 60px;
-    height: auto;
-    object-fit: contain;
-}
-
-.btn-action-banner:nth-child(1) {
-    position: absolute;
-    top: 70%;
-    right: 0;
-    bottom: 0;
-    left: 18%;
-}
-
-.btn-action-banner:nth-child(3) {
-    position: absolute;
-    top: 70%;
-    right: 0;
-    bottom: 0;
-    right: 18%;
-}
-
 /* Header */
 
 #header-select-class {
@@ -313,7 +516,7 @@
         background-repeat: no-repeat;
         background-position: center 100%;
         max-height: 372px;
-        height: 50vh;
+        height: 55vh;
     }
 }
 
@@ -393,9 +596,9 @@
     .name-character-class {
         font-family: "Uncial Antiqua", cursive;
         font-weight: 400;
-        font-size: clamp(12px, 1.38vw, 20px);
+        font-size: clamp(12px, 1vw, 20px);
         position: absolute;
-        top: 41%;
+        top: 46%;
         color: #E3BB38;
         text-shadow: 0px 0px 1px #000000;
     }
@@ -417,7 +620,7 @@
     .name-character-monster {
         font-family: "Uncial Antiqua", cursive;
         font-weight: 400;
-        font-size: clamp(12px, 1vw, 16px);
+        font-size: clamp(12px, 1vw, 20px);
         position: absolute;
         padding-left: 5px;
         top: 36%;
@@ -476,8 +679,8 @@
     .img-selected-monster {
         max-width: 370px;
         width: 25.69vw;
-        max-height: 225px;
-        height: 21.97vh;
+        max-height: 250px;
+        height: 30vh;
         object-fit: contain;
     }
 }
@@ -600,7 +803,7 @@
     left: 15%;
     font-family: "Uncial Antiqua", cursive;
     font-weight: 500;
-    font-size: clamp(12px, 1.94vw, 20px);
+    font-size: clamp(12px, 1.3vw, 20px);
     color: #E3BB38;
     text-shadow: 0px 0px 2px #000000;
     z-index: 2;
@@ -613,7 +816,7 @@
     left: -3%;
     font-family: "Uncial Antiqua", cursive;
     font-weight: 500;
-    font-size: clamp(12px, 1.45vw, 20px);
+    font-size: 12px;
     color: #CD0303;
     text-shadow: 0px 0px 1px #000000;
     text-align: center;
@@ -625,10 +828,10 @@
         width: 130px;
         position: absolute;
         bottom: 100%;
-        left: -3%;
+        left: 0%;
         font-family: "Uncial Antiqua", cursive;
         font-weight: 600;
-        font-size: clamp(12px, 1.45vw, 20px);
+        font-size: 16px;
         color: #CD0303;
         text-shadow: 0px 0px 1px #000000;
         text-align: center;
@@ -644,7 +847,7 @@
         left: 10%;
         font-family: "Uncial Antiqua", cursive;
         font-weight: 600;
-        font-size: clamp(12px, 1.45vw, 20px);
+        font-size: clamp(12px, 1.3vw, 20px);
         color: #CD0303;
         text-shadow: 0px 0px 1px #000000;
         text-align: center;
@@ -966,7 +1169,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 24px;
+    gap: 0;
 
     padding-top: 40px;
 
@@ -1108,7 +1311,7 @@
     justify-content: center;
     align-items: center;
     top: 30%;
-    left: 24%;
+    left: 21%;
 }
 
 @media(min-width: 768px) {
@@ -1118,7 +1321,7 @@
         justify-content: center;
         align-items: center;
         top: 32%;
-        left: 24%;
+        left: 22%;
     }
 }
 
@@ -1129,7 +1332,7 @@
         justify-content: center;
         align-items: center;
         top: 32%;
-        left: 25%;
+        left: 22%;
     }
 }
 
@@ -1138,7 +1341,7 @@
     color: #FFFFFF;
     -webkit-text-stroke-width: .25px;
     -webkit-text-stroke-color: #D2B34F;
-    font-size: clamp(12px, 1.5vw, 22px);
+    font-size: clamp(8px, 1vw, 22px);
     padding-bottom: 3px;
 }
 
@@ -1148,15 +1351,26 @@
         color: #FFFFFF;
         -webkit-text-stroke-width: .25px;
         -webkit-text-stroke-color: #D2B34F;
-        font-size: 18px;
-        padding-bottom: 3px;
+        font-size: 13px;
+        padding-bottom: 8px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .number-hp-class {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        -webkit-text-stroke-width: .25px;
+        -webkit-text-stroke-color: #D2B34F;
+        font-size: 14px;
+        padding-bottom: 10px;
     }
 }
 
 .barra-class {
     font-family: "Uncial Antiqua", cursive;
     color: #D2B34F;
-    font-size: clamp(8px, 1vw, 12px);
+    font-size: clamp(5px, .7vw, 12px);
     padding-top: 2px;
 }
 
@@ -1164,7 +1378,16 @@
     .barra-class {
         font-family: "Uncial Antiqua", cursive;
         color: #D2B34F;
-        font-size: 14px;
+        font-size: 10px;
+        padding-top: 2px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .barra-class {
+        font-family: "Uncial Antiqua", cursive;
+        color: #D2B34F;
+        font-size: 10px;
         padding-top: 2px;
     }
 }
@@ -1172,14 +1395,22 @@
 .number-hpMax-class {
     font-family: "Uncial Antiqua", cursive;
     color: #FFFFFF;
-    font-size: clamp(8px, 1vw, 12px);
+    font-size: clamp(5px, .7vw, 12px);
 }
 
 @media (min-width: 768px) {
     .number-hpMax-class {
         font-family: "Uncial Antiqua", cursive;
         color: #FFFFFF;
-        font-size: 14px;
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .number-hpMax-class {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        font-size: 10px;
     }
 }
 
@@ -1299,7 +1530,7 @@
     justify-content: center;
     align-items: center;
     top: 30%;
-    right: 24%;
+    right: 21%;
     z-index: 2;
 }
 
@@ -1310,7 +1541,7 @@
         justify-content: center;
         align-items: center;
         top: 32%;
-        right: 24%;
+        right: 22%;
         z-index: 2;
     }
 }
@@ -1322,7 +1553,7 @@
         justify-content: center;
         align-items: center;
         top: 32%;
-        right: 25%;
+        right: 22%;
         z-index: 2;
     }
 }
@@ -1332,7 +1563,7 @@
     color: #FFFFFF;
     -webkit-text-stroke-width: .25px;
     -webkit-text-stroke-color: #CD0303;
-    font-size: clamp(12px, 1.5vw, 22px);
+    font-size: clamp(8px, 1vw, 22px);
     padding-bottom: 3px;
 }
 
@@ -1342,15 +1573,26 @@
         color: #FFFFFF;
         -webkit-text-stroke-width: .25px;
         -webkit-text-stroke-color: #CD0303;
-        font-size: 18px;
-        padding-bottom: 3px;
+        font-size: 13px;
+        padding-bottom: 8px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .number-hp-monster {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        -webkit-text-stroke-width: .25px;
+        -webkit-text-stroke-color: #CD0303;
+        font-size: 14px;
+        padding-bottom: 10px;
     }
 }
 
 .barra-monster {
     font-family: "Uncial Antiqua", cursive;
     color: #CD0303;
-    font-size: clamp(8px, 1vw, 12px);
+    font-size: clamp(5px, .7vw, 12px);
     padding-top: 2px;
 }
 
@@ -1358,7 +1600,16 @@
     .barra-monster {
         font-family: "Uncial Antiqua", cursive;
         color: #CD0303;
-        font-size: 14px;
+        font-size: 9px;
+        padding-top: 2px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .barra-monster {
+        font-family: "Uncial Antiqua", cursive;
+        color: #CD0303;
+        font-size: 10px;
         padding-top: 2px;
     }
 }
@@ -1366,14 +1617,22 @@
 .number-hpMax-monster {
     font-family: "Uncial Antiqua", cursive;
     color: #FFFFFF;
-    font-size: clamp(8px, 1vw, 12px);
+    font-size: clamp(5px, .7vw, 12px);
 }
 
 @media (min-width: 768px) {
     .number-hpMax-monster {
         font-family: "Uncial Antiqua", cursive;
         color: #FFFFFF;
-        font-size: 14px;
+        font-size: 9px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .number-hpMax-monster {
+        font-family: "Uncial Antiqua", cursive;
+        color: #FFFFFF;
+        font-size: 10px;
     }
 }
 
@@ -1455,8 +1714,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    gap: clamp(50px, 13.88vw, 200px);
-    height: 96vh;
+    gap: 30px;
+    height: 95vh;
     position: relative;
 }
 
@@ -1465,7 +1724,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: clamp(150px, 13.88vw, 200px);
+        gap: 150px;
         height: 75vh;
         position: relative;
     }
@@ -1474,16 +1733,15 @@
 @media(min-width: 1024px) {
     #section-combat {
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
-        gap: clamp(150px, 13.88vw, 200px);
         height: 70vh;
         position: relative;
     }
 }
 
 .img-class-combat {
-    width: 150px;
+    width: 160px;
     height: 110px;
     object-fit: contain;
 }
@@ -1499,18 +1757,37 @@
 
 @media(min-width: 1024px) {
     .img-class-combat {
-        width: 400px;
+        width: 300px;
         height: 200px;
         object-fit: contain;
-        transform: translate(-10%, -5%);
+        transform: translate(10%, -10%);
     }
 }
 
 @media(min-height: 1024px) {
     .img-class-combat {
-        width: 400px;
+        max-width: 500px;
+        max-height: 300px;
         object-fit: contain;
-        transform: translate(10%, 30%);
+        transform: translate(10%, 20%);
+    }
+}
+
+@media(min-height: 1180px) {
+    .img-class-combat {
+        max-width: 200px;
+        height: 200px;
+        object-fit: contain;
+        transform: translate(10%, 40%);
+    }
+}
+
+@media(min-height: 1336px) {
+    .img-class-combat {
+        max-width: 200px;
+        height: 200px;
+        object-fit: contain;
+        transform: translate(30%, 90%);
     }
 }
 
@@ -1528,15 +1805,15 @@
 }
 
 .img-monster-combat {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 130px;
     object-fit: contain;
 }
 
 @media(min-width: 768px) {
     .img-monster-combat {
-        width: 200px;
-        height: 300px;
+        width: 300px;
+        height: auto;
         object-fit: contain;
         transform: translate(0%, -10%);
     }
@@ -1545,17 +1822,38 @@
 @media(min-width: 1024px) {
     .img-monster-combat {
         width: 400px;
-        height: 300px;
+        height: 350px;
         object-fit: contain;
-        transform: translate(10%, -5%);
+        transform: translate(20%, -10%);
     }
 }
 
 @media(min-height: 1024px) {
     .img-monster-combat {
-        width: 400px;
+        max-width: 500px;
+        max-height: 500px;
         object-fit: contain;
-        transform: translate(10%, 20%);
+        transform: translate(10%, 5%);
+    }
+}
+
+@media(min-height: 1180px) {
+    .img-monster-combat {
+        max-width: 400px;
+        width: 40vw;
+        height: auto;
+        object-fit: contain;
+        transform: translate(10%, 30%);
+    }
+}
+
+@media(min-height: 1336px) {
+    .img-monster-combat {
+        max-width: 400px;
+        width: 40vw;
+        height: auto;
+        object-fit: contain;
+        transform: translate(20%, 70%);
     }
 }
 
@@ -1594,22 +1892,40 @@
 
 #number-dice {
     position: absolute;
-    left: 43.4%;
-    top: 26%;
+    top: 28%;
+    text-align: center;
     font-family: "Cinzel", serif;
     font-weight: bold;
-    font-size: clamp(22px, 2.22vw, 20px);
+    font-size: clamp(16px, 2vw, 20px);
     color: #dad5b4;
+}
+
+@media (min-width: 1024px) {
+    #number-dice {
+        position: absolute;
+        top: 26%;
+        text-align: center;
+        font-family: "Cinzel", serif;
+        font-weight: bold;
+        font-size: clamp(14px, 2vw, 20px);
+        color: #dad5b4;
+    }
 }
 
 .btn-roll-dice {
     width: 90px;
     height: auto;
+    cursor: pointer;
+    transition: 200ms ease;
+}
+
+.btn-roll-dice:hover {
+    transform: scale(1.03);
 }
 
 #container-actions {
     position: absolute;
-    bottom: 14%;
+    bottom: 13%;
     left: 50%;
     transform: translateX(-50%);
 
@@ -1618,6 +1934,21 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+@media(min-width: 768px) {
+    #container-actions {
+        position: absolute;
+        bottom: 3%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
 }
 
 @media(min-width: 1024px) {
@@ -1641,6 +1972,14 @@
     width: 100px;
     height: auto;
     object-fit: contain;
+    cursor: pointer;
+    transition: 200ms ease;
+}
+
+.btn-attack:hover,
+.btn-heal:hover,
+.btn-spell:hover {
+    transform: scale(1.03);
 }
 
 @media(min-width: 1024px) {
@@ -1659,7 +1998,7 @@
     .btn-attack,
     .btn-heal,
     .btn-spell {
-        width: 250px;
+        width: 200px;
         height: auto;
         object-fit: contain;
     }
@@ -1724,7 +2063,7 @@
         background-repeat: no-repeat;
         background-position: center;
 
-        width: 380px;
+        width: 430px;
         height: 100px;
     }
 }
@@ -1750,7 +2089,7 @@
 
     font-family: "Uncial Antiqua", cursive;
     font-weight: 500;
-    font-size: clamp(12px, 1.66vw, 24px);
+    font-size: clamp(12px, 1.38vw, 20px);
     color: #CD0303;
     text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.6);
 }
@@ -1938,10 +2277,145 @@
     gap: 2px;
 }
 
+#journey-section {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    margin: 0 auto;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+}
+
+#journey-section.show {
+    display: flex;
+}
+
+#journey-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#journey-container-txt {
+    position: relative;
+    background-image: url(/assets/background-informação-personagem-monstro.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 375px;
+    height: 500px;
+    max-height: 70vh;
+    z-index: 1;
+    margin: 0 auto;
+}
+
+
+@media(min-width: 1024px) {
+    #journey-container-txt {
+        background-image: url(/assets/background-informação-personagem-monstro-90deg.png);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 500px;
+        height: 500px;
+    }
+}
+
+#journey-content-txt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: min(500px, 90%);
+    height: min(200px, 100%);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#journey-content-txt::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.journey-line {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    text-align: center;
+}
+
+.monster {
+    font-family: "IM Fell English SC", cursive;
+    font-weight: 500;
+    color: #CD0303;
+    font-size: clamp(6px, 1.5vw, 22px);
+    text-shadow: 0px 0px 1px #000000;
+}
+
+.player {
+    font-family: "IM Fell English SC", cursive;
+    font-weight: 500;
+    color: #FFFFFF;
+    font-size: clamp(6px, 1.5vw, 22px);
+    text-shadow: 0px 0px 4px #000000;
+    -webkit-text-stroke-width: .4px;
+    -webkit-text-stroke-color: #D2B34F;
+}
+
 .fade-out {
     opacity: 0;
 }
 
 .fade-in {
     opacity: 1;
+}
+
+#toast-response-class,
+#toast-response-monster {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .5s ease, transform .5s ease;
+}
+
+#toast-response-class.show,
+#toast-response-monster.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#section-victory.show,
+#section-derrota.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+#toast-stock-victory.show {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.bar-life-animated-left,
+.bar-life-animated-right {
+    transition: transform 0.3s linear;
+}
+
+.bar-life-animated-left {
+    transform-origin: left center;
+}
+
+.bar-life-animated-right {
+    transform-origin: right center;
 }

@@ -9,7 +9,8 @@
     <title>Combate | Class Fantasy</title>
 </head>
 
-<body id="body-monster">
+<body id="body-monster" data-person-id="ancient-red-dragon" data-person-type="monster"
+    data-person-name="Ancient-Red-Dragon" data-person-img="./assets/ancient-red-dragon-monster.png">
     <header id="header-data">
         <img src="/assets/Logo-Class-Fantasy-RPG.png" alt="Logo-Class-Fantasy-RPG" class="img-logo-CFR">
 
@@ -44,13 +45,13 @@
                     </div>
 
                     <div class="contain-damage">
-                        <h2 class="damage">Dano: 108</h2>
+                        <h2 class="damage">Dano: 28d12 + 10</h2>
                     </div>
                 </div>
 
                 <div class="contain-index-victory-defeat">
-                    <h2 class="index-victory">Vitória: ${vic}</h2>
-                    <h2 class="index-defeat">Derrota: ${defe}</h2>
+                    <h2 class="index-victory"></h2>
+                    <h2 class="index-defeat"></h2>
                 </div>
 
                 <div class="spell-class">
@@ -77,9 +78,11 @@
         </a>
 
         <a href="">
-            <img src="/assets/botão-equipar.png" alt="botão play" class="btn-equipar">
+            <img src="/assets/botão-selecionar.png" alt="botão play" class="btn-equipar">
         </a>
     </footer>
+
+    <script src="/app.js"></script>
 </body>
 
 </html>

@@ -42,15 +42,15 @@
 
     <main id="main-combat">
         <section id="section-combat">
-            <img src="./assets/cleric-class.png" alt="class-combate" class="img-class-combat">
+            <img src="./assets/paladin-class.png" alt="class-combate" class="img-class-combat">
 
             <div id="container-dice">
                 <img src="./assets/dado-D20.png" alt="dado-D20" class="img-dice">
                 <p id="number-dice">0</p>
-                <img src="./assets/botão-rolar-dado.png" alt="botção-rolar-dado" class="btn-roll-dice">
+                <img src="./assets/botão-rolar-dado.png" alt="botão-rolar-dado" class="btn-roll-dice">
             </div>
 
-            <img src="./assets/ancient-red-dragon-monster.png" alt="monster-combat" class="img-monster-combat">
+            <img src="./assets/balor-monster.png" alt="monster-combat" class="img-monster-combat">
         </section>
 
         <div id="container-actions">
@@ -64,24 +64,25 @@
     </main>
 
     <div id="toast-response-class">
-        <p class="response-class">Cleric usou a magia GUIDING BOLT</p>
+        <p class="response-class"></p>
     </div>
 
     <div id="toast-response-monster">
-        <p class="response-monster">Ancient Red Dragon usou a habilidade especial FIRE BREATH</p>
+        <p class="response-monster"></p>
     </div>
 
     <section id="section-victory">
         <div id="banner-victory">
             <h2 id="title-victory">VITÓRIA</h2>
-            <p id="text-banner-victory">
-                Você derrotou o ${monster} com sucesso!
-            </p>
+            <p id="text-banner-victory"></p>
 
             <div id="container-btns-action">
-                <img src="./assets/botão-sua-jornada.png" alt="botão-sua-jornada" class="btn-action-banner">
-                <img src="./assets/botão-jogar-novamente.png" alt="jogar-novamente" class="btn-action-banner">
-                <img src="./assets/botão-sair.png" alt="sair" class="btn-action-banner">
+                <img src="./assets/botão-sua-jornada.png" alt="botão-sua-jornada"
+                    class="btn-journey-banner btn-journey-banner">
+                <img src="./assets/botão-jogar-novamente.png" alt="jogar-novamente" class="btn-play-again-banner">
+                <a href="index.html" class="link-action-banner">
+                    <img src="./assets/botão-sair.png" alt="sair" class="btn-exit-banner">
+                </a>
             </div>
         </div>
     </section>
@@ -98,12 +99,24 @@
             </p>
 
             <div id="container-btns-action">
-                <img src="./assets/botão-sua-jornada.png" alt="botão-sua-jornada" class="btn-action-banner">
-                <img src="./assets/botão-jogar-novamente.png" alt="jogar-novamente" class="btn-action-banner">
-                <img src="./assets/botão-sair.png" alt="sair" class="btn-action-banner">
+                <img src="./assets/botão-sua-jornada.png" alt="botão-sua-jornada"
+                    class="btn-journey-banner btn-journey-banner">
+                <img src="./assets/botão-jogar-novamente.png" alt="jogar-novamente" class="btn-play-again-banner">
+                <a href="index.html" class="link-action-banner">
+                    <img src="./assets/botão-sair.png" alt="sair" class="btn-exit-banner">
+                </a>
             </div>
         </div>
     </section>
+
+    <section id="journey-section">
+        <div id="journey-container-txt">
+            <div id="journey-content-txt">
+            </div>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
 </body>
 
 </html>

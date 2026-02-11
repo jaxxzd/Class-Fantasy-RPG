@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/CSS/styles.css">
-    <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
     <title>Combate | Class Fantasy</title>
 </head>
 
-<body id="body-class">
+<body id="body-class" data-person-id="wizard" data-person-type="class" data-person-name="Wizard"
+    data-person-img="./assets/wizard-class.png">
     <header id="header-data">
         <img src="/assets/Logo-Class-Fantasy-RPG.png" alt="Logo-Class-Fantasy-RPG" class="img-logo-CFR">
 
@@ -29,34 +30,34 @@
                 <div class="contain-status">
                     <h2 class="title-data">STATUS:</h2>
                     <div class="contain-life">
-                        <h2 class="life">Vida: ${life}</h2>
+                        <h2 class="life">Vida: 70</h2>
                     </div>
 
                     <div class="contain-def-attack">
 
                         <div>
-                            <h2 class="defense">Defesa: ${def}</h2>
+                            <h2 class="defense">Defesa: 12</h2>
                         </div>
 
                         <div>
-                            <h2 class="attack">Ataque: ${atk}</h2>
+                            <h2 class="attack">Ataque: 15</h2>
                         </div>
                     </div>
 
                     <div class="contain-damage">
-                        <h2 class="damage">Dano: ${damage}</h2>
+                        <h2 class="damage">Dano: 6d20</h2>
                     </div>
                 </div>
 
                 <div class="contain-index-victory-defeat">
-                    <h2 class="index-victory">Vitória: ${vic}</h2>
-                    <h2 class="index-defeat">Derrota: ${defe}</h2>
+                    <h2 class="index-victory"></h2>
+                    <h2 class="index-defeat"></h2>
                 </div>
 
                 <div class="spell-class">
                     <h2 class="title-data">MAGIAS:</h2>
                     <h3 class="subtitle-spell-class">ONDA DE TROVÃO</h3>
-                    <p class="txt-damage-dice">Dano do dado: 2d8</p>
+                    <p class="txt-damage-dice">Dano do dado: 5d14</p>
                     <p class="type-damage">Tipo de ataque: Thunder</p>
                 </div>
 
@@ -88,6 +89,8 @@
             <img src="/assets/botão-equipar.png" alt="botão play" class="btn-equipar">
         </a>
     </footer>
+
+    <script src="/app.js"></script>
 </body>
 
 </html>
