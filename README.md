@@ -23,6 +23,7 @@ Você poderá clonar o repositório deste projeto para integrar novas funcionali
 Clone o repositório:
 
 git clone git@github.com:jaxxzd/Class-Fantasy-RPG.git (SSH)
+
 git clone https://github.com/jaxxzd/Class-Fantasy-RPG.git (HTTPS)
 
 # Recursos/Endpoints (D&D API 5e) 📍
