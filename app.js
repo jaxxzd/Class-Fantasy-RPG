@@ -215,7 +215,7 @@ const catalogClass = {
         hpMax: 90,
         acBase: 12,
         attackBonus: 14,
-
+        damageBonus: 10,
         weaponIndex: "handaxe",
         armorIndex: "leather-armor",
         spellIndex: null,
@@ -227,7 +227,7 @@ const catalogClass = {
         hpMax: 105,
         acBase: 16,
         attackBonus: 11,
-
+        damageBonus: 5,
         weaponIndex: "warhammer",
         armorIndex: "scale-mail",
         spellIndex: "guiding-bolt",
@@ -239,7 +239,7 @@ const catalogClass = {
         hpMax: 100,
         acBase: 16,
         attackBonus: 12,
-
+        damageBonus: 3,
         weaponIndex: "longsword",
         armorIndex: "chain-mail",
         spellIndex: "divine-favor",
@@ -248,10 +248,10 @@ const catalogClass = {
 
     rogue: {
         name: "Rogue",
-        hpMax: 80,
+        hpMax: 90,
         acBase: 12,
         attackBonus: 17,
-
+        damageBonus: 10,
         weaponIndex: "shortsword",
         armorIndex: "chain-mail",
         spellIndex: null,
@@ -263,10 +263,11 @@ const catalogClass = {
         hpMax: 75,
         acBase: 12,
         attackBonus: 15,
+        damageBonus: null,
         weaponIndex: "dagger",
         armorIndex: null,
         spellIndex: "fire-bolt",
-        spellDice: "4d18"
+        spellDice: "3d20"
     },
 
     wizard: {
@@ -274,12 +275,12 @@ const catalogClass = {
         hpMax: 70,
         acBase: 12,
         attackBonus: 15,
-
+        damageBonus: null,
         attackDice: "1d6",
         weaponIndex: "quarterstaff",
         armorIndex: null,
         spellIndex: "thunderwave",
-        spellDice: "5d20"
+        spellDice: "4d16"
     },
 }
 
@@ -289,6 +290,17 @@ const monsterActions = {
     "balor": ["Longsword", "Whip"],
     "chimera": ["Bite", "Horns"],
     "oni": ["Claw (Oni Form Only)"]
+}
+
+const monsterSpellArchmageOnly = {
+    "archmage": ["magic-missile", "lightning-bolt"]
+}
+
+const archmageSpell = {
+    archmage: {
+        "magic-missile": "2d7",
+        "lightning-bolt": "2d6"
+    }
 }
 
 const baseAPI = "https://www.dnd5eapi.co/api";
@@ -343,6 +355,9 @@ async function creationTurnCombat() {
         getMonster(selectedMonster.id),
     ]);
 
+    const spellIndex = monsterSpellArchmageOnly[selectedMonster.id] ?? [];
+    const spells = await Promise.all(spellIndex.map(getSpell)).catch(() => []);
+
     combatState.player = {
         base: {
             id: selectedClass.id,
@@ -351,7 +366,8 @@ async function creationTurnCombat() {
             acBase: baseClass.acBase,
             attackBonus: baseClass.attackBonus,
             spellDice: baseClass.spellDice ?? null,
-            attackDice: baseClass.attackDice ?? null
+            attackDice: baseClass.attackDice ?? null,
+            damageBonus: baseClass.damageBonus ?? null
         },
         api: { weapon, armor, spell },
         currentHp: baseClass.hpMax
@@ -359,13 +375,15 @@ async function creationTurnCombat() {
 
     combatState.monster = {
         base: { id: selectedMonster.id, name: monster.name },
-        api: { actions: monster.actions ?? [] },
+        api: {
+            actions: monster.actions ?? [],
+            spells
+        },
         hpMax: monster.hit_points,
         currentHp: monster.hit_points,
         ac: getMonsterAcAPI(monster)
     };
 
-    console.log(combatState.monster.api.actions.map(a => a.name));
     return combatState;
 }
 
@@ -596,15 +614,17 @@ function playerAttack(state) {
     if (roll == null) return { done: false, dmg: 0 };
 
     const attackBonus = Number(state.player.base.attackBonus) || 0;
+    const dmgBonus = Number(state.player.base.damageBonus) || 5
     const acMonster = Number(state.monster.ac) || 15;
 
     if (roll === 1) return { done: true, dmg: 0, log: `${state.player.base.name} errou o ataque.` };
 
-    const weaponDice = state.player.base.attackDice;
+    const weaponDice = state.player.api.weapon.damage.damage_dice;
+    console.log(weaponDice)
     if (!weaponDice) return { done: true, dmg: 0 };
 
     if (roll === 20) {
-        const dmg = rollDice(weaponDice) + rollDice(weaponDice);
+        const dmg = rollDice(weaponDice) + rollDice(weaponDice) + dmgBonus;
         state.monster.currentHp = Math.max(0, state.monster.currentHp - dmg);
         return { done: true, dmg, log: `${state.player.base.name} atacou com ${state.player.api.weapon?.name ?? "arma"}.` };
     };
@@ -614,7 +634,7 @@ function playerAttack(state) {
         return { done: true, dmg: 0, log: `${state.player.base.name} errou o ataque.` };
     };
 
-    const dmg = rollDice(weaponDice);
+    const dmg = rollDice(weaponDice) + dmgBonus;
     state.monster.currentHp = Math.max(0, state.monster.currentHp - dmg);
     return { done: true, dmg, log: `${state.player.base.name} atacou com ${state.player.api.weapon?.name ?? "arma"}.` };
 }
@@ -667,9 +687,25 @@ function playerSpell(state) {
 }
 
 function monsterAttack(state) {
-    const dmg = rollDice("2d12");
+    const dmg = rollDice("1d10");
     state.player.currentHp = Math.max(0, state.player.currentHp - dmg);
     showLogToast(state, "monster", `${state.monster.base.name} atacou.`);
+    return dmg;
+}
+
+function getSelectedMonsterSpells(state) {
+    const id = state.monster.base.id;
+    return state.monster.api.spells ?? [];
+}
+
+function runMonsterSpell(state, spell) {
+    const monsterId = state.monster.base.id;
+    const dice = monsterSpellArchmageOnly[monsterId]?.[spell.index] ?? "2d8";
+
+    const dmg = rollDice(dice);
+    state.player.currentHp = Math.max(0, state.player.currentHp - dmg);
+
+    showLogToast(state, "monster", `${state.monster.base.name} usou ${spell.name}.`);
     return dmg;
 }
 
@@ -722,23 +758,33 @@ async function monsterTurn(state) {
 
     const hpVerification = state.monster.currentHp / state.monster.hpMax;
     const actions = getSelectMonsterActions(state);
+    const spell = getSelectedMonsterSpells(state);
+
 
     // 20% a menos de vida cura
     if (hpVerification < 0.20 && Math.random() < 0.5) {
         monsterHeal(state);
-    }
-    else if (actions) {
+    } else if (actions.length && Math.random() < 0.30) {
+        // Ações feitas por monstros, com probabilidade definda
         const index = Math.floor(Math.random() * actions.length);
-        const selectAction = actions[index];
-        runMonsterAction(state, selectAction);
-        updateWrapperUI(state);
+        runMonsterAction(state, actions[index]);
+        endMonsterTurn(state);
+    } else if (spell.length && Math.random() < 0.30) {
+        // Ataque de magia para monstros mágicos (habilidades especiais) com probabilidade
+        const index = Math.floor(Math.random() * spell.length);
+        runMonsterSpell(state, spell[index]);
+        endMonsterTurn(state);
     } else {
-        monsterDealDamage(state, "2d8", "atacou");
+        // fallback
+        monsterDealDamage(state, "1d10", "atacou");
+        endMonsterTurn(state);
     }
 
+}
+
+function endMonsterTurn(state) {
     if (doneEndCombat(state)) return;
     updateWrapperUI(state);
-
     state.turn = "player";
     disableBtnRollDice(state);
 }

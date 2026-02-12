@@ -6,15 +6,15 @@ O principal objetivo do projeto é o consumo de uma API pública, manipulação 
 
 # Instrução de gameplay 🕹️
 
-Ao início do jogo você se depara com duas interrogações, a primeira tela em que se localiza serve para você equipar a classe que irá começar a batalha com um monstro, ao selecionar, a interrogação será substituída pela imagem da classe equipada, mostrando o nome da classe na parte superior.
+Ao início do jogo você se depara com duas interrogações, a primeira tela em que se localiza, serve para você equipar a classe que irá começar a batalha com um monstro, ao equipar, a interrogação será substituída pela imagem da classe equipada, mostrando o nome da classe na parte superior.
 
 Diante a primeira página, você possui variedades de opção de classes, possibilitando equipá-las ou inspêcioná-las para visualizar seus dados de vida, ataque, defesa e dano, com informações de vitória e derrota (salvamento de progresso) e detalhes sobre suas especialidades como magias e equipamentos.
 
-Ao clicar no botão "Next" no footer, você será direcionado a seleção de monstros, onde terá a oportunidade de selecionar o seu oponente formidável, ao clicar em selecionar nos cards dos monstros será efetuado o mesmo processo de substituição da interrogação para a imagem correspondente ao monstro, monstrando o seu nome no topo.
+Ao clicar no botão "Next" no footer (parte inferior), você será direcionado a seleção de monstros, onde terá a oportunidade de selecionar o seu oponente formidável, ao clicar em selecionar em um dos cards dos monstros, será efetuado o mesmo processo de substituição da interrogação para a imagem correspondente ao monstro, monstrando o seu nome no topo.
 
 Diante a segunda página, temos o mesmo fluxo de variedades de monstros, podendo escolher qual monstro irá batalhar, com opções de selecioná-los ou inspecionâ-los onde terá suas mais importantes informações técnicas.
 
-Ao selecionar sua classe e monstro deverá clicar no botão "PLAY" para iniciar a batalha, ao clicar, irá se deparar com um dado D20, para girá-lo e acionar as suas táticas precisará clicar no botão "Rolar dado", ao clicar neste botão, poderá escolher dentre as três opções de ação abaixo, definido por "Ataque", "Cura" e "Magia". Você seguirá um fluxo de turno neste combate, podendo executar as suas ações e o monstro as dele, quem conseguir ser mais estratégico e habilidoso vence o jogo. Ao final do jogo você pode observar as suas ações clicando no botão "Sua jornada", olhando os passos que você deu e os passos do monstro, além de poder clicar em "Jogar novamente" e viver mais uma aventura ou clicar em sair para testar personagens diferentes!
+Ao selecionar sua classe e monstro, deverá clicar no botão "PLAY" para iniciar a batalha, ao clicar, irá se deparar com um dado D20, para girá-lo e acionar as suas táticas, precisará clicar no botão "Rolar dado", ao clicar neste botão, poderá escolher dentre as três opções de ação abaixo, definido por "Ataque", "Cura" e "Magia". Você seguirá um fluxo de turno neste combate, podendo executar as suas ações e o monstro as dele, quem conseguir ser mais estratégico e habilidoso vence o jogo. Ao final do jogo você pode observar as suas ações clicando no botão "Sua jornada", olhando os passos que você deu e os passos do monstro, além de poder clicar em "Jogar novamente" e viver mais uma aventura ou clicar em sair para testar personagens diferentes!
 
 # Clonagem do projeto 💻🌍
 
@@ -61,5 +61,17 @@ Proatividade na contenção de erros vindos da base de dados da API, com utiliza
 Imersão e informação ao usuário a cada ação executada.
 
 Busca por um tema de jogo Dark Fantasy e organização de imagens para que coincidem com o objetivo.
+
+# Como o dado D20 funciona 🎲
+
+O dado d20 ou dado de 20 faces funciona como o motor principal de sistemas de RPG, sendo ele, capaz de decidir os seus sucessos e falhas.
+
+Caso consiga tirar o número 20 (dano crítico) no dado d20, te possibilitará um alcance enorme de força, duplicando suas maestrias e causando um dano forte em seu oponente.
+
+Se pela sua má sorte de tirar o número 1, perderá a capacidade de atacar o seu oponente, com falha automática devido ao AC do seu oponente, que tende a ser de 5+.
+
+
+
+
 
 
