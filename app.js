@@ -1,3 +1,10 @@
+const _setItem = localStorage.setItem.bind(localStorage);
+localStorage.setItem = (k, v) => {
+    if (k === "selectedMonster") console.trace("setItem selectedMonster =", v);
+    return _setItem(k, v);
+};
+
+
 function saveCharacter(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
@@ -20,8 +27,8 @@ function addedSaveSelection(key, imgSelector, nameSelector) {
     const imgCFR = document.querySelector(imgSelector);
     const nameCFR = document.querySelector(nameSelector);
 
-    if (imgCFR && data.img) imgCFR.src = data.img
-    if (nameCFR && data.name) nameCFR.textContent = data.name
+    if (imgCFR && data.img) imgCFR.src = data.img;
+    if (nameCFR && data.name) nameCFR.textContent = data.name;
 }
 
 addedSaveSelection("selectedClass", ".img-selected-class", ".name-character-class");
@@ -144,8 +151,8 @@ function equipSelectPersonFromInspectView() {
     if (!btn) return false;
 
     const titlePerson = type === "class" ? "#title-data-class" : "#title-data-monster";
-    const namePerson = document.querySelector(titlePerson)?.textContent?.trim() || id;
-    const imgPerson = document.querySelector(".img-class-data")?.getAttribute("src") || "";
+    const name = document.querySelector(titlePerson)?.textContent?.trim() || id;
+    const img = document.querySelector(".img-class-data")?.getAttribute("src") || "";
 
     const storageKey = type === "class" ? "selectedClass" : "selectedMonster";
 
@@ -159,7 +166,7 @@ function equipSelectPersonFromInspectView() {
     btn.addEventListener("click", (e) => {
         e.preventDefault();
 
-        localStorage.setItem(storageKey, JSON.stringify({ id, name: namePerson, img: imgPerson }));
+        localStorage.setItem(storageKey, JSON.stringify({ id, name, img }));
 
         btn.src = selectSrc;
 
@@ -224,7 +231,7 @@ const catalogClass = {
         weaponIndex: "warhammer",
         armorIndex: "scale-mail",
         spellIndex: "guiding-bolt",
-        spellDice: "2d18"
+        spellDice: "3d16"
     },
 
     paladin: {
@@ -236,14 +243,14 @@ const catalogClass = {
         weaponIndex: "longsword",
         armorIndex: "chain-mail",
         spellIndex: "divine-favor",
-        spellDice: "6d8"
+        spellDice: "6d10"
     },
 
     rogue: {
         name: "Rogue",
         hpMax: 80,
         acBase: 12,
-        attackBonus: 13,
+        attackBonus: 17,
 
         weaponIndex: "shortsword",
         armorIndex: "chain-mail",
@@ -259,7 +266,7 @@ const catalogClass = {
         weaponIndex: "dagger",
         armorIndex: null,
         spellIndex: "fire-bolt",
-        spellDice: "3d10"
+        spellDice: "4d18"
     },
 
     wizard: {
@@ -268,11 +275,20 @@ const catalogClass = {
         acBase: 12,
         attackBonus: 15,
 
+        attackDice: "1d6",
         weaponIndex: "quarterstaff",
         armorIndex: null,
         spellIndex: "thunderwave",
-        spellDice: "20d20"
+        spellDice: "5d20"
     },
+}
+
+const monsterActions = {
+    "aboleth": ["Tentacle", "Tail"],
+    "ancient-red-dragon": ["Fire Breath", "Claw"],
+    "balor": ["Longsword", "Whip"],
+    "chimera": ["Bite", "Horns"],
+    "oni": ["Claw (Oni Form Only)"]
 }
 
 const baseAPI = "https://www.dnd5eapi.co/api";
@@ -312,7 +328,10 @@ function getMonsterAcAPI(monsterAPI) {
 async function creationTurnCombat() {
     const selectedClass = loadCharacter("selectedClass");
     const selectedMonster = loadCharacter("selectedMonster");
-    if (!selectedClass || !selectedMonster) return null;
+    if (!selectedClass?.id || !selectedMonster?.id) {
+        console.warn("seleção incompleta", { selectedClass, selectedMonster });
+        return null;
+    };
 
     const baseClass = catalogClass[selectedClass.id];
     if (!baseClass) return null;
@@ -332,6 +351,7 @@ async function creationTurnCombat() {
             acBase: baseClass.acBase,
             attackBonus: baseClass.attackBonus,
             spellDice: baseClass.spellDice ?? null,
+            attackDice: baseClass.attackDice ?? null
         },
         api: { weapon, armor, spell },
         currentHp: baseClass.hpMax
@@ -339,11 +359,13 @@ async function creationTurnCombat() {
 
     combatState.monster = {
         base: { id: selectedMonster.id, name: monster.name },
-        api: { special_abilities: monster.special_abilities?.slice(0, 2) ?? [] },
+        api: { actions: monster.actions ?? [] },
         hpMax: monster.hit_points,
         currentHp: monster.hit_points,
         ac: getMonsterAcAPI(monster)
     };
+
+    console.log(combatState.monster.api.actions.map(a => a.name));
     return combatState;
 }
 
@@ -578,7 +600,7 @@ function playerAttack(state) {
 
     if (roll === 1) return { done: true, dmg: 0, log: `${state.player.base.name} errou o ataque.` };
 
-    const weaponDice = state.player.api.weapon?.damage?.damage_dice;
+    const weaponDice = state.player.base.attackDice;
     if (!weaponDice) return { done: true, dmg: 0 };
 
     if (roll === 20) {
@@ -658,11 +680,35 @@ function monsterHeal(state) {
     return heal;
 }
 
-function monsterSpecial(state) {
-    const dmg = rollDice("2d14");
+function getSelectMonsterActions(state) {
+    const monsterId = state.monster.base.id;
+    const allowList = monsterActions[monsterId] ?? [];
+
+    const selected = state.monster.api.actions.filter(a => allowList.includes(a.name));
+
+    return selected;
+}
+
+function runMonsterAction(state, action) {
+    // versão arcade: você decide o dano por nome
+    if (action.name === "Tail") return monsterDealDamage(state, "2d6", `usou ${action.name}`);
+    if (action.name === "Tentacle") return monsterDealDamage(state, "2d8", `usou ${action.name}`);
+    if (action.name === "Fire Breath") return monsterDealDamage(state, "2d14", `usou ${action.name}`);
+    if (action.name === "Claw") return monsterDealDamage(state, "2d8", `usou ${action.name}`);
+    if (action.name === "Longsword") return monsterDealDamage(state, "2d10", `usou ${action.name}`);
+    if (action.name === "Whip") return monsterDealDamage(state, "2d9", `usou ${action.name}`);
+    if (action.name === "Bite") return monsterDealDamage(state, "2d8", `usou ${action.name}`);
+    if (action.name === "Horns") return monsterDealDamage(state, "2d7", `usou ${action.name}`);
+    if (action.name === "Claw (Oni Form Only)") return monsterDealDamage(state, "2d7", `usou Claw`);
+
+    // fallback
+    return monsterDealDamage(state, "2d8", `usou ${action.name}`);
+}
+
+function monsterDealDamage(state, dice, log) {
+    const dmg = rollDice(dice);
     state.player.currentHp = Math.max(0, state.player.currentHp - dmg);
-    const abilityName = state.monster.api.special_abilities?.[0]?.name ?? "habilidade especial";
-    showLogToast(state, "monster", `${state.monster.base.name} usou ${abilityName}.`);
+    showLogToast(state, "monster", `${state.monster.base.name} ${log}.`);
     return dmg;
 }
 
@@ -672,19 +718,24 @@ async function monsterTurn(state) {
     disableBtnRollDice(state);
 
     const numberDice = document.querySelector("#number-dice");
-    const roll = await animationUiD20(numberDice, 1200);
+    await animationUiD20(numberDice, 1200);
 
     const hpVerification = state.monster.currentHp / state.monster.hpMax;
-    const SpecialAbility = (state.monster.api.special_abilities?.length ?? 0) > 0;
+    const actions = getSelectMonsterActions(state);
 
-    // 35% ou menos da vida: cura
-    if (hpVerification <= 0.20) {
+    // 20% a menos de vida cura
+    if (hpVerification < 0.20 && Math.random() < 0.5) {
         monsterHeal(state);
-    } else if (SpecialAbility && Math.random() < 0.20) {
-        monsterSpecial(state);
-    } else {
-        monsterAttack(state);
     }
+    else if (actions) {
+        const index = Math.floor(Math.random() * actions.length);
+        const selectAction = actions[index];
+        runMonsterAction(state, selectAction);
+        updateWrapperUI(state);
+    } else {
+        monsterDealDamage(state, "2d8", "atacou");
+    }
+
     if (doneEndCombat(state)) return;
     updateWrapperUI(state);
 

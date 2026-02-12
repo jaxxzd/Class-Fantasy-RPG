@@ -25,6 +25,7 @@
     background-position: center;
 
     filter: blur(1px);
+    transform: scale(1.1);
     z-index: -1;
 }
 
@@ -44,6 +45,7 @@
     background-position: center;
 
     filter: blur(3px);
+    transform: scale(1.1);
     z-index: -1;
 }
 
@@ -108,7 +110,7 @@
 }
 
 .response-class {
-    width: 90%;
+    width: 80%;
 
     font-family: "Im Fell English SC", serif;
     font-weight: 400;
@@ -170,7 +172,7 @@
 }
 
 .response-monster {
-    width: 90%;
+    width: 80%;
 
     font-family: "Im Fell English SC", serif;
     font-weight: 400;
@@ -400,7 +402,7 @@
         width: 40%;
         font-family: "IM Fell English SC", sans-serif;
         font-weight: 500;
-        font-size: 20px;
+        font-size: 16px;
         text-align: center;
     }
 }
@@ -2245,7 +2247,7 @@
 .subtitle-equipment-class {
     font-family: "Uncial Antiqua", cursive;
     font-weight: 500;
-    font-size: clamp(12px, 1.4vw, 20px);
+    font-size: clamp(12px, 1.4vw, 16px);
     color: #FFFFFF;
     text-shadow: 0px 0px 2px #000000;
     padding-left: 20px;
@@ -2301,7 +2303,7 @@
 
 #journey-container-txt {
     position: relative;
-    background-image: url(/assets/background-informação-personagem-monstro.png);
+    background-image: url(/assets/background-informação-personagem-monstro-90deg.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -2312,8 +2314,7 @@
     align-items: center;
 
     width: 375px;
-    height: 500px;
-    max-height: 70vh;
+    height: 25vh;
     z-index: 1;
     margin: 0 auto;
 }
@@ -2326,7 +2327,7 @@
         background-position: center;
         background-repeat: no-repeat;
         width: 500px;
-        height: 500px;
+        height: 50vh;
     }
 }
 
@@ -2336,7 +2337,7 @@
     align-items: center;
     gap: 12px;
     width: min(500px, 90%);
-    height: min(200px, 100%);
+    height: min(200px, 60%);
     overflow-y: scroll;
     overflow-x: hidden;
     scrollbar-width: none;
@@ -2349,6 +2350,7 @@
 }
 
 .journey-line {
+    width: 70%;
     white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;
